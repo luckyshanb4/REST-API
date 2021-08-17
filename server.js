@@ -2,15 +2,14 @@ const express=require("express");
 const bodyParser = require("body-parser");
 
 const app=express();
+
+//import routes
+const postRoutes = require('./routes/orders');
+
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get("/orders",function(req,res){
-    res.send("<h1> Test </h1>");
-})
-
-app.post("/orders",function(req,res){
-    console.log(req.body);
-})
+//route middleware
+app.use(postRoutes);
 
 
 app.listen(process.env.PORT || 3000,function(){
