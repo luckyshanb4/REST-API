@@ -1,11 +1,9 @@
-const orderList=["order1","order2"];
-
-exports.isValidOrder=function(currenrOrder){
-    return true;
-}
+const orderList=[];
 
 
-exports.addOrder=function(currenrOrder){
+
+exports.addOrder=function(currentOrder){
+    orderList.push(currentOrder);
     console.log("Added order successfully");
 }
 
