@@ -1,6 +1,7 @@
 const express = require('express');
 const Restursnt = require('../resturant_manager/resturant');
 const { body, validationResult } = require('express-validator/check');
+const uuid = require('uuid');
 
 const router=express.Router();
 
@@ -17,13 +18,30 @@ router.post(
     // ordered person name should be non empty
     body('orderedBy').isLength({ min: 3 }),
     // ordered quantity is a number greater than 0
-    // body('quantity').isLength({ min: 5 }),
+    body('quantity').isInt({ min: 1}),
+    // unit price is greater than 0.5 usd
+    body('unitPrice').isFloat({min:.5}),
+
         (req, res) => {
     // Finds the validation errors in this request and wraps them in an object with handy functions
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
+
+      //Add created date
+      let ts = Date.now();
+
+      let date_ob = new Date(ts);
+      let date = date_ob.getDate();
+      let month = date_ob.getMonth() + 1;
+      let year = date_ob.getFullYear();
+      
+
+      req.body.createdDate=year + "-" + month + "-" + date;
+
+      //generate and assign unique id to order
+      req.body.orderId=uuid.v1();
   
       //if everything of we add the order to list
       Restursnt.addOrder(req.body);
