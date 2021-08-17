@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(postRoutes);
 
 
-app.listen(process.env.PORT || 3000,function(){
-    console.log("Server started on port 3000 successfully")
-})
+// app.listen(process.env.PORT || 3000,function(){
+//     console.log("Server started on port 3000 successfully")
+// })
+
+module.exports = app
