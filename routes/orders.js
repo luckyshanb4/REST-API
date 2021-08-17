@@ -6,12 +6,29 @@ const uuid = require('uuid');
 const router=express.Router();
 
 
+/**
+ * @swagger
+ * get:
+ *  description: Use to request all orders 
+ *  responses:
+ *      description: orders array
+ */
 router.get("/orders",function(req,res){
     res.send(Restursnt.getOrders());
    
 })
 
 
+/**
+ * @swagger
+ * post:
+ *  description: Use add an order as a post request
+ *  responses:
+ *  '200':
+ *      description: successful operation
+ * '400':
+ *      description: Unsuccessful operation
+ */
 router.post(
     '/orders',
     // ordered food item should be non empty
@@ -27,6 +44,7 @@ router.post(
     // Finds the validation errors in this request and wraps them in an object with handy functions
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
+          console.log(errors);
         return res.status(400).json({ errors: errors.array() });
       }
 
