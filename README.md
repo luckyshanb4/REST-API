@@ -4,7 +4,7 @@ Backend Engineer Skills Assessment
 Installation
 
 git clone https://github.com/luckyshanb4/REST-API.git
-cd express-example-app
+cd REST-API
 npm install
 
 Run Project:
